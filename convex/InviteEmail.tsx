@@ -17,7 +17,7 @@ import React from "react";
 const InviteEmail = ({inviteLink, projectName}: {inviteLink: string; projectName: string}) => {
   const previewText = `You've been invited to join ${projectName} on TravelPlannerAI!`;
 
-  const BASE_URL = process.env.HOSTING_URL ?? "https://travelplannerai.online";
+  const BASE_URL = process.env.HOSTING_URL ?? "https://tripplanner-ai.vercel.app/";
 
   return (
     <Html>

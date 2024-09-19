@@ -52,7 +52,7 @@ export default function Map({topPlacesToVisit, selectedPlace}: MapProps) {
   ) : (
     <div className="w-full h-full flex flex-col gap-2 justify-center items-center bg-background text-balance px-2 text-center">
       <MapPin className="h-20 w-20" />
-      <span>Search and select a lcoation to add to places to visit</span>
+      <span>Search and select a location to add to places to visit</span>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { ConvexError, v } from "convex/values";
 export const getCurrentWeather = action({
     args: { placeName: v.string() },
     async handler(ctx, { placeName }) {
+        console.log("hi")
         if (!process.env.OPEN_WEATHER_MAP_API_KEY || !placeName) return;
 
         const cityName = placeName?.split(/[,-]/)[0].trim();

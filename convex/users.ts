@@ -50,7 +50,7 @@ export const reduceUserCreditsByOne = mutation({
   async handler(ctx) {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
-      throw new ConvexError("Not Authrized to perform this action");
+      throw new ConvexError("Not Authorized to perform this action");
     }
 
     const userRecord = await userQuery(ctx, identity.subject);
@@ -74,7 +74,7 @@ export const updateDisplayName = mutation({
 
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
-      throw new ConvexError("Not Authrized to update display name");
+      throw new ConvexError("Not Authorized to update display name");
     }
 
     const userRecord = await userQuery(ctx, identity.subject);

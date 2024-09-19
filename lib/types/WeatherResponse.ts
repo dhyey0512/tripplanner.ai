@@ -1,5 +1,5 @@
-// 20200516233806
-// https://openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02
+
+//https://openweathermap.org/data/2.5/weather?q=London,uk&appid=d6f597fdbf6f80300bcaf3933c5251c9
 
 import { CountryCode } from "./CountryCode";
 import { Coordinate } from "./Unit";

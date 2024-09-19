@@ -23,6 +23,7 @@ import {ReactNode, useEffect, useState} from "react";
 
 const Weather = ({placeName}: {placeName: string | undefined}) => {
   const getWeather = useAction(api.weather.getCurrentWeather);
+  console.log(api.weather.getCurrentWeather)
   const {setPlanState} = usePlanContext();
   const [weatherData, setWeatherData] = useState<CurrentWeatherResponse | undefined>(undefined);
 
@@ -30,8 +31,9 @@ const Weather = ({placeName}: {placeName: string | undefined}) => {
     if (!placeName) return;
     getWeather({placeName: placeName})
       .then((data) => {
+        console.log(data)
         if (data) {
-          setWeatherData(data);
+         setWeatherData(data);
         }
       })
       .catch((e) => {
