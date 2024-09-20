@@ -36,7 +36,7 @@ const InviteEmail = ({inviteLink, projectName}: {inviteLink: string; projectName
             </Section>
             <Section className="text-center mt-[32px] mb-[32px]">
               <Text className="text-black font-medium text-[14px] leading-[24px]">
-                You&apos;ve been invited to join <b>{projectName}</b> Travel Plan on Travel Planner
+                You&apos;ve been invited to join <b>{projectName}</b> Travel Plan on HiddenTrails
                 AI
               </Text>
               <Button
@@ -59,7 +59,7 @@ const InviteEmail = ({inviteLink, projectName}: {inviteLink: string; projectName
             </Section>
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
             <Text className="text-[#666666  ] text-[12px] leading-[24px] flex items-center text-center justify-center w-full">
-              @ 2024 TravelPlannerAI. All rights reserved.
+              @ 2024 HiddenTrails. All rights reserved.
             </Text>
           </Container>
         </Body>

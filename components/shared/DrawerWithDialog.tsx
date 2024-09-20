@@ -6,7 +6,7 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/
 import Image from "next/image";
 import empty_cart from "@/public/empty_cart.svg";
 import {Button, buttonVariants} from "@/components/ui/button";
-import {useState} from "react";
+import {useState , useEffect, useRef} from "react";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {Drawer, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
 import NewPlanForm from "@/components/NewPlanForm";
@@ -89,6 +89,28 @@ const CreditContent = ({
   freeCredits: number;
   email: string | undefined;
 }) => {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    // Dynamically create and inject the Razorpay script into the form
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+    script.setAttribute("data-payment_button_id", "pl_OzMhymLBtibh46");
+    script.async = true;
+
+    // Append the script to the form via ref
+    if (formRef.current) {
+      formRef.current.appendChild(script);
+    }
+
+    // Cleanup: remove script on component unmount
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <div>
       {boughtCredits > 0 || freeCredits > 0 ? (
@@ -115,19 +137,14 @@ const CreditContent = ({
         </div>
       )}
 
-      <Link
-        className={cn(
-          buttonVariants({variant: "default"}),
-          "bg-blue-500 text-white hover:bg-blue-700",
-          "flex gap-1 justify-center items-center mt-2 mb-1"
-        )}
-        href={`${process.env.NEXT_PUBLIC_RAZORPAY_PAYMENT_PAGE_URL}${
-          email ? `/?email=${email} ` : ``
-        }`}
-      >
-        <LockIcon className="w-4 h-4" />
-        <span>Purchase Credits</span>
-      </Link>
+      {/* Razorpay payment button will be rendered here */}
+      <form 
+      ref={formRef} 
+      id="razorpay-form"
+      className="flex justify-center mt-4">
+      </form>
+
+
       <div className="flex gap-1 justify-end">
         <svg
           width="12"
@@ -147,5 +164,6 @@ const CreditContent = ({
     </div>
   );
 };
+
 
 export default DrawerWithDialog;

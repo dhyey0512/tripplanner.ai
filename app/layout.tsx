@@ -14,26 +14,26 @@ const inter = Montserrat_Alternates({weight: "500", subsets: ["cyrillic"]});
 export const metadata: Metadata = {
   metadataBase: new URL("https://tripplanner-ai.vercel.app/"),
   title: {
-    default: "Travel Planner AI - Your Smart Travel Planner",
-    template: "%s | Travel Planner AI - Your Smart Travel Planner",
+    default: "HiddenTrails  - Your Smart Travel Planner",
+    template: "%s | HiddenTrails - Your Smart Travel Planner",
   },
   description:
-    "Travel Planner AI provides intelligent travel suggestions, personalized itineraries, and seamless trip planning. Plan your perfect trip with ease.",
+    "HiddenTrails AI provides intelligent travel suggestions, personalized itineraries, and seamless trip planning. Plan your perfect trip with ease.",
   keywords:
     "travel planner, AI travel planner, smart travel, travel suggestions, destination insights, personalized itineraries, trip planning, travel tips, vacation planning",
   openGraph: {
     title: "Travel Planner AI - Your Smart Travel Planner",
     description:
-      "Travel Planner AI provides intelligent travel suggestions, personalized itineraries, and seamless trip planning. Plan your perfect trip with ease.",
+      "HiddenTrails AI provides intelligent travel suggestions, personalized itineraries, and seamless trip planning. Plan your perfect trip with ease.",
     url: "https://tripplanner-ai.vercel.app/",
     type: "website",
-    siteName: "TravelPlannerAI",
+    siteName: "HiddenTrails",
     images: [
       {
         url: "opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Travel Planner AI",
+        alt: "HiddenTrails",
       },
     ],
   },

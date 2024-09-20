@@ -48,10 +48,10 @@ const MobileMenu = () => {
               className="flex flex-col leading-5
                              font-bold text-md p-1"
             >
-              <span>Travel</span>
+              <span>Hidden</span>
               <span>
-                Planner
-                <span className="text-blue-500 ml-0.5">AI</span>
+                Trails
+                <span className="text-blue-500 ml-0.5"></span>
               </span>
             </div>
           </Link>
