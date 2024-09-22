@@ -61,7 +61,7 @@ function AccessDenied() {
           <p>The Plan you are trying to access either does not belong to you or does not exist.</p>
           <div className="text-md text-muted-foreground max-w-[90%]">
             Return to your{" "}
-            <Link href="/dashboard" className="text-blue-500 hover:underline hover:text-blue-700">
+            <Link href="/dashboard" className="text-yellow-500 hover:underline hover:text-yellow-700">
               Dashboard
             </Link>{" "}
             or use the navigation switcher at the top to view your existing travel plans.

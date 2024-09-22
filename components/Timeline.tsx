@@ -28,9 +28,9 @@ const Timeline = ({itinerary, planId, allowEdit}: TimelineProps) => {
     <ol className="relative border-s border-gray-200 dark:border-foreground/40 ml-10 mt-5">
       {filteredItinerary?.map((day) => (
         <li className="mb-10 ms-6" key={day.title}>
-          <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+          <span className="absolute flex items-center justify-center w-6 h-6 bg-yellow-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-yellow-900">
             <svg
-              className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
+              className="w-2.5 h-2.5 text-yellow-800 dark:text-yellow-300"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -44,7 +44,7 @@ const Timeline = ({itinerary, planId, allowEdit}: TimelineProps) => {
             <Activity
               activity={day.activities.morning}
               heading="Morning"
-              icon={<Sunrise className="w-4 h-4 text-blue-500" />}
+              icon={<Sunrise className="w-4 h-4 text-yellow-500" />}
             />
             <Activity
               activity={day.activities.afternoon}

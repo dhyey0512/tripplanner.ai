@@ -55,7 +55,7 @@ const MobileMenu = ({isPublic}: {isPublic: boolean}) => {
               <span>Travel</span>
               <span>
                 Planner
-                <span className="text-blue-500 ml-0.5">AI</span>
+                <span className="text-yellow-500 ml-0.5">AI</span>
               </span>
             </div>
           </Link>

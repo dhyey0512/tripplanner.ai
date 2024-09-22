@@ -2,6 +2,7 @@
 
 import {api} from "@/convex/_generated/api";
 import {useQuery} from "convex/react";
+import Razorpay from "razorpay";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import Image from "next/image";
 import empty_cart from "@/public/empty_cart.svg";
@@ -45,7 +46,7 @@ const DrawerWithDialog = ({shouldOpenForCreatePlan = false}) => {
           aria-label={`open dialog button for ${btnText}`}
           variant={`${!shouldOpenForCreatePlan ? "link" : "default"}`}
           className={`${
-            shouldOpenForCreatePlan && "bg-blue-500  hover:bg-blue-600 text-white flex gap-1"
+            shouldOpenForCreatePlan && "bg-yellow-500  hover:bg-yellow-600 text-white flex gap-1"
           }`}
           onClick={() => {
             setOpen(true);
@@ -68,7 +69,7 @@ const DrawerWithDialog = ({shouldOpenForCreatePlan = false}) => {
           variant="outline"
           aria-label={`open drawer for ${btnText}`}
           className={`${
-            shouldOpenForCreatePlan && "bg-blue-500 text-white hover:bg-blue-600 flex gap-1"
+            shouldOpenForCreatePlan && "bg-yellow-500 text-white hover:bg-yellow-600 flex gap-1"
           }`}
         >
           {shouldOpenForCreatePlan && <Backpack className="h-4 w-4" />}

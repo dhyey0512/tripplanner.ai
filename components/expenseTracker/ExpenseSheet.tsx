@@ -118,14 +118,14 @@ export default function ExpenseSheet({
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         {edit ? (
-          <span className="hover:underline hover:underline-offset-2 text-blue-600 hover:font-medium cursor-pointer">
+          <span className="hover:underline hover:underline-offset-2 text-yellow-600 hover:font-medium cursor-pointer">
             {data?.purpose}
           </span>
         ) : (
           <Button
             size="sm"
             variant="default"
-            className="bg-blue-500 hover:bg-blue-700 text-white hover:bg-blue-700hover:text-white"
+            className="bg-yellow-500 hover:bg-yellow-700 text-white hover:bg-yellow-700hover:text-white"
           >
             Add a New Expense
           </Button>
@@ -250,7 +250,7 @@ export default function ExpenseSheet({
               variant="outline"
               className={cn("text-white hover:text-white", {
                 "bg-teal-500 hover:bg-teal-700": edit,
-                "bg-blue-500 hover:bg-blue-700": !edit,
+                "bg-yellow-500 hover:bg-yellow-700": !edit,
               })}
             >
               {edit ? "Update" : "Add"} Expense

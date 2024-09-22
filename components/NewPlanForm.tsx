@@ -145,7 +145,7 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
                     <label
                       key={activity.id}
                       className="flex-grow p-1 opacity-50 hover:opacity-100 dark:opacity-40 dark:hover:opacity-100 
-                      has-[:checked]:bg-blue-100 has-[:checked]:opacity-100 dark:has-[:checked]:opacity-100
+                      has-[:checked]:bg-yellow-100 has-[:checked]:opacity-100 dark:has-[:checked]:opacity-100
                       duration-200 transition-all ease-in-out
                       rounded-md cursor-pointer select-none
                       flex justify-center items-center
@@ -193,7 +193,7 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
                     <label
                       key={companion.id}
                       className="flex-1 p-1 opacity-50 hover:opacity-100 dark:opacity-40 dark:hover:opacity-100 
-                has-[:checked]:bg-blue-100 has-[:checked]:opacity-100 dark:has-[:checked]:opacity-100
+                has-[:checked]:bg-yellow-100 has-[:checked]:opacity-100 dark:has-[:checked]:opacity-100
                 duration-200 transition-all ease-in-out
                 rounded-md cursor-pointer select-none
                 flex justify-center items-center
@@ -227,7 +227,7 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
             aria-label="generate plan"
             type="submit"
             disabled={pendingEmptyPlan || pendingAIPlan || !form.formState.isValid}
-            className="bg-blue-500 text-white hover:bg-blue-600 w-full"
+            className="bg-yellow-500 text-white hover:bg-yellow-600 w-full"
           >
             {pendingEmptyPlan ? (
               <div className="flex gap-1 justify-center items-center">

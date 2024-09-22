@@ -7,7 +7,7 @@ export const batch1Schema = {
         },
         besttimetovisit: {
             type: "string",
-            description: "Best time to visit",
+            description: "Best time to visit and peak time of the year",
         },
 
     },
@@ -22,7 +22,7 @@ export const batch2Schema = {
     properties: {
         adventuresactivitiestodo: {
             type: "array",
-            description: "Top adventures activities, atleast 5, like trekking, water sports, specify the place also",
+            description: "Top adventures activities, atleast 5 with their budget, like trekking, water sports, specify the place also",
             items: { type: "string" },
         },
         localcuisinerecommendations: {

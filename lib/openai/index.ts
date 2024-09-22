@@ -35,7 +35,7 @@ export const generatebatch1 = (promptText: string) => {
     - A string containing information about the place, comprising at least 50 words.
   
   - Best Time to Visit:
-    - A string specifying the best time to visit the place.
+    - A string specifying the best time to visit the place and peak time of the year.
   
   Ensure that the function response adheres to the schema provided and is in JSON format. The response should not contain anything outside of the defined schema.
   `;
@@ -54,13 +54,13 @@ export const generatebatch2 = (inputParams: OpenAIInputType) => {
   const description = `Generate a description of recommendations for an adventurous trip according to the following schema:
   - Top Adventures Activities:
     - An array listing top adventure activities to do, including at least 5 activities.
-    - Each activity should be specified along with its location.
+    - Each activity should be specified along with its location and budget.
   
   - Local Cuisine Recommendations:
-    - An array providing recommendations for local cuisine to try during the trip.
+    - An array providing recommendations for local cuisine to try during the trip with price .
   
   - Packing Checklist:
-    - An array containing items that should be included in the packing checklist for the trip.
+    - An array containing items that should be included in the packing checklist for the trip according to weather , location and activities.
   
   Ensure that the function response adheres to the schema provided and is in JSON format. The response should not contain anything outside of the defined schema.`;
   return callOpenAIApi(getPropmpt(inputParams), batch2Schema, description);
@@ -69,7 +69,7 @@ export const generatebatch2 = (inputParams: OpenAIInputType) => {
 export const generatebatch3 = (inputParams: OpenAIInputType) => {
   const description = `Generate a description of a travel itinerary and top places to visit according to the following schema:
   - Itinerary:
-    - An array containing details of the itinerary for the specified number of days.
+    - An array containing details of the itinerary for the specified number of days and bugdet of that trip.
     - Each day's itinerary includes a title and activities for morning, afternoon, and evening.
     - Activities are described as follows:
       - Morning, Afternoon, Evening:

@@ -17,8 +17,8 @@ const Banner = () => {
           className="font-bold lg:text-7xl md:text-5xl text-4xl font-sans
       text-left w-full"
         >
-          Uncover the <br /> <span className="text-blue-500">AI</span> Travel{" "}
-          <span className="text-blue-500">Plan</span>
+          Uncover the <br /> <span className="text-yellow-500">AI</span> Travel{" "}
+          <span className="text-yellow-500">Plan</span>
         </h1>
 
         <div className="mt-5 lg:mt-10 rounded-md w-full text-left lg:text-lg md:text-md text-base">
@@ -27,9 +27,9 @@ const Banner = () => {
             <span className="text-center ">Imagine telling your travel planner,</span>
           </div>
           <div className="p-2">
-            <p className="text-blue-500 font-bold tracking-wide lg:text-md md:text-base text-sm">
-              'Weekend escape to a vibrant city, <br className="lg:hidden" />
-              with mid-range budget in summer.'
+            <p className="text-yellow-500 font-bold tracking-wide lg:text-md md:text-base text-sm">
+              'A summer weekend getaway to a lively city, <br className="lg:hidden" />
+              perfect for a mid-range budget.'
             </p>
             <p
               className="mt-5 mb-5 
@@ -40,9 +40,7 @@ const Banner = () => {
                         md:max-w-xl 
                         text-left"
             >
-              Our AI not only understands but crafts a personalized adventure. Discover local
-              secrets, savor culinary delights, and explore iconic landmarks with an itinerary
-              designed just for you.
+              Our AI goes beyond understanding – it creates a personalized journey tailored to you. Uncover hidden gems, indulge in local cuisine, and explore renowned landmarks with a custom itinerary built around your unique preferences.
             </p>
           </div>
         </div>

@@ -51,7 +51,7 @@ const MobileMenu = () => {
               <span>Hidden</span>
               <span>
                 Trails
-                <span className="text-blue-500 ml-0.5"></span>
+                <span className="text-yellow-500 ml-0.5"></span>
               </span>
             </div>
           </Link>

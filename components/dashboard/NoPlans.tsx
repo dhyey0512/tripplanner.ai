@@ -9,7 +9,7 @@ export function NoPlans({isLoading}: {isLoading: boolean}) {
           "animate-pulse": isLoading,
         })}
       >
-        <GiJourney className="text-9xl text-blue-500 dark:text-foreground" />
+        <GiJourney className="text-9xl text-yellow-500 dark:text-foreground" />
         <p className="font-bold text-lg capitalize leading-10">
           {isLoading ? "Loading Travel Plans..." : "No plans created yet!"}
         </p>
