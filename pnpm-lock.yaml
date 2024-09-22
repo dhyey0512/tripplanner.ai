@@ -1312,7 +1312,7 @@ packages:
     resolution: {integrity: sha512-dCG8vQGk4js5v88/k83tTedWOwjGnIyONrKpHpfmSJB8jwFHl8GSu1sBBxbtACVAPtAQgwNxl0rw1d3RqRM1Tg==}
     engines: {node: '>=12'}
 
-  '@types/yellowbird@3.5.42':
+  '@types/bluebird@3.5.42':
     resolution: {integrity: sha512-Jhy+MWRlro6UjVi578V/4ZGNfeCOcNCp0YaFNIUGFKlImowqwb1O/22wDVk3FDGMLqxdpOV3qQHD5fPEH4hK6A==}
 
   '@types/body-parser@1.19.5':
@@ -1501,7 +1501,7 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
 
-  yellowbird@3.7.2:
+  bluebird@3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
 
   brace-expansion@2.0.1:
@@ -3840,7 +3840,7 @@ snapshots:
 
   '@tanstack/table-core@8.16.0': {}
 
-  '@types/yellowbird@3.5.42': {}
+  '@types/bluebird@3.5.42': {}
 
   '@types/body-parser@1.19.5':
     dependencies:
@@ -3922,7 +3922,7 @@ snapshots:
 
   '@types/request-promise@4.1.51':
     dependencies:
-      '@types/yellowbird': 3.5.42
+      '@types/bluebird': 3.5.42
       '@types/request': 2.48.12
 
   '@types/request@2.48.12':
@@ -4043,7 +4043,7 @@ snapshots:
 
   binary-extensions@2.2.0: {}
 
-  yellowbird@3.7.2: {}
+  bluebird@3.7.2: {}
 
   brace-expansion@2.0.1:
     dependencies:
@@ -4868,7 +4868,7 @@ snapshots:
 
   request-promise@4.2.6(request@2.88.2):
     dependencies:
-      yellowbird: 3.7.2
+      bluebird: 3.7.2
       request: 2.88.2
       request-promise-core: 1.1.4(request@2.88.2)
       stealthy-require: 1.1.1
