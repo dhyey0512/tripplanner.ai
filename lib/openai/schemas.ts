@@ -18,7 +18,7 @@ export const batch1Schema = {
 };
 
 /*export const batch2Schema = {*/
-    export const generatebatch2 = (inputParams: OpenAIInputType) => {
+    export const batch2Schema = (inputParams: OpenAIInputType) => {
   const description = `Generate recommendations for an adventurous trip according to the following schema:
 
   - Adventures Activities to Do:
