@@ -8,14 +8,14 @@ import OpenAI from "openai";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const promptSuffix = `generate travel data according to the schema and in json format,
-                     do not return anything in your response outside of curly braces, 
-                     generate response as per the functin schema provided. Dates given,
-                     activity preference and travelling with may influence likw 50% while generating plan.`;
+const promptSuffix = `generate travel data according to the schema and in JSON format.
+                      Do not return anything in your response outside of curly braces. 
+                      Ensure that all prices are provided in Indian Rupees (₹). 
+                      Dates given, activity preferences, and travel companions should influence the plan by 50%.`;
 
 const callOpenAIApi = (prompt: string, schema: any, description: string) => {
   console.log({ prompt, schema });
-  console.log("Calling")
+  console.log("Calling");
   return openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
     messages: [
@@ -25,22 +25,21 @@ const callOpenAIApi = (prompt: string, schema: any, description: string) => {
     functions: [{ name: "set_travel_details", parameters: schema, description }],
     function_call: { name: "set_travel_details" },
   });
-}
+};
 
 export const generatebatch1 = (promptText: string) => {
   const prompt = `${promptText}, ${promptSuffix}`;
-  const description = `Generate a description of information about a place or location according to the following schema:
-
+  const description = `Generate a description of information about a place according to the following schema:
+  
   - About the Place:
-    - A string containing information about the place, comprising at least 50 words.
-  
+    - A string containing at least 50 words about the place.
+
   - Best Time to Visit:
-    - A string specifying the best time to visit the place and peak time of the year.
-  
-  Ensure that the function response adheres to the schema provided and is in JSON format. The response should not contain anything outside of the defined schema.
-  `;
+    - A string specifying the best and peak time to visit the place.
+
+  Ensure the response follows the schema and is in JSON format.`;
   return callOpenAIApi(prompt, batch1Schema, description);
-}
+};
 
 type OpenAIInputType = {
   userPrompt: string;
@@ -51,45 +50,49 @@ type OpenAIInputType = {
 };
 
 export const generatebatch2 = (inputParams: OpenAIInputType) => {
-  const description = `Generate a description of recommendations for an adventurous trip according to the following schema:
-  - Top Adventures Activities:
-    - An array listing top adventure activities to do, including at least 5 activities.
-    - Each activity should be specified along with its location and budget in rupees.
-  
+  const description = `Generate recommendations for an adventurous trip according to the following schema:
+
+  - Top Adventure Activities:
+    - An array listing at least 5 activities, with each activity having:
+      - Location
+      - Budget in Indian Rupees (₹)
+
   - Local Cuisine Recommendations:
-    - An array providing recommendations for local cuisine to try during the trip with price in rupees  .
-  
+    - An array providing recommendations for local cuisine, each with:
+      - Price in Indian Rupees (₹)
+
   - Packing Checklist:
-    - An array containing items that should be included in the packing checklist for the trip according to weather , location and activities.
-  
-  Ensure that the function response adheres to the schema provided and is in JSON format. The response should not contain anything outside of the defined schema.`;
-  return callOpenAIApi(getPropmpt(inputParams), batch2Schema, description);
-}
+    - An array listing packing items based on weather, location, and activities.
+
+  Ensure the function response follows the schema and is in JSON format.`;
+  return callOpenAIApi(getPrompt(inputParams), batch2Schema, description);
+};
 
 export const generatebatch3 = (inputParams: OpenAIInputType) => {
-  const description = `Generate a description of a travel itinerary and top places to visit according to the following schema:
-  - Itinerary:
-    - An array containing details of the itinerary for the specified number of days and bugdet of that trip.
-    - Each day's itinerary includes a title and activities for morning, afternoon, and evening.
-    - Activities are described as follows:
-      - Morning, Afternoon, Evening:
-        - Each includes an array of itinerary items, where each item has a description and a brief description.
-  
-  - Top Places to Visit:
-    - An array listing the top places to visit along with their coordinates.
-    - Each place includes a name and coordinates (latitude and longitude).
-  
-  Ensure that the function response adheres to the schema provided and is in JSON format. The response should not contain anything outside of the defined schema.`;
-  return callOpenAIApi(getPropmpt(inputParams), batch3Schema, description);
-}
+  const description = `Generate a travel itinerary and top places to visit according to the following schema:
 
-const getPropmpt = ({ userPrompt, activityPreferences, companion, fromDate, toDate }: OpenAIInputType) => {
+  - Itinerary:
+    - An array with details for each day of the trip, including:
+      - Title and activities for morning, afternoon, and evening.
+      - Each activity includes a description.
+
+  - Top Places to Visit:
+    - An array listing places, each with:
+      - Name and coordinates (latitude and longitude).
+
+  Ensure the response follows the schema and is in JSON format.`;
+  return callOpenAIApi(getPrompt(inputParams), batch3Schema, description);
+};
+
+const getPrompt = ({ userPrompt, activityPreferences, companion, fromDate, toDate }: OpenAIInputType) => {
   let prompt = `${userPrompt}, from date-${fromDate} to date-${toDate}`;
 
-  if (companion && companion.length > 0) prompt += `${prompt}, travelling with-${companion}`;
+  if (companion) prompt += `, travelling with-${companion}`;
 
-  if (activityPreferences && activityPreferences.length > 0) prompt += `${prompt}, activity preferences-${activityPreferences.join(",")}`;
+  if (activityPreferences && activityPreferences.length > 0) {
+    prompt += `, activity preferences-${activityPreferences.join(", ")}`;
+  }
 
   prompt = `${prompt}, ${promptSuffix}`;
   return prompt;
-}
+};
