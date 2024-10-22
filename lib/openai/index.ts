@@ -51,20 +51,16 @@ type OpenAIInputType = {
 
 export const generatebatch2 = (inputParams: OpenAIInputType) => {
   const description = `Generate recommendations for an adventurous trip according to the following schema:
+  - Adventures Activities to Do: At least 5 activities, each containing:
+    - Activity name and location
+    - Budget in Indian Rupees (₹)
+  - Local Cuisine Recommendations: At least 5 dishes, each containing:
+    - Name of the dish
+    - Price in Indian Rupees (₹)
+  - Packing Checklist: A list of items to pack based on the weather, activities, and location.
 
-  - Top Adventure Activities:
-    - An array listing at least 5 activities, with each activity having:
-      - Location
-      - Budget in Indian Rupees (₹)
+Ensure the response is in JSON format and adheres strictly to the provided schema.`;
 
-  - Local Cuisine Recommendations:
-    - An array providing recommendations for local cuisine, each with:
-      - Price in Indian Rupees (₹)
-
-  - Packing Checklist:
-    - An array listing packing items based on weather, location, and activities.
-
-  Ensure the function response follows the schema and is in JSON format.`;
   return callOpenAIApi(getPrompt(inputParams), batch2Schema, description);
 };
 
