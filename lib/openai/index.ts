@@ -54,10 +54,10 @@ export const generatebatch2 = (inputParams: OpenAIInputType) => {
   const description = `Generate a description of recommendations for an adventurous trip according to the following schema:
   - Top Adventures Activities:
     - An array listing top adventure activities to do, including at least 5 activities.
-    - Each activity should be specified along with its location and budget.
+    - Each activity should be specified along with its location and budget in rupees.
   
   - Local Cuisine Recommendations:
-    - An array providing recommendations for local cuisine to try during the trip with price .
+    - An array providing recommendations for local cuisine to try during the trip with price in rupees  .
   
   - Packing Checklist:
     - An array containing items that should be included in the packing checklist for the trip according to weather , location and activities.
