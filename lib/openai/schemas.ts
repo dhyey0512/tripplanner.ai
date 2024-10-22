@@ -22,12 +22,12 @@ export const batch2Schema = {
     properties: {
         adventuresactivitiestodo: {
             type: "array",
-            description: "Top adventures activities, atleast 5 with their budget, like trekking, water sports, specify the place also",
+            description: "Top adventures activities, atleast 5 with their budget in rupees, like trekking, water sports, specify the place also",
             items: { type: "string" },
         },
         localcuisinerecommendations: {
             type: "array",
-            description: "Local Cuisine Recommendations",
+            description: "Local Cuisine Recommendations atleast 5 with their budget in rupees",
             items: { type: "string" },
         },
         packingchecklist: {
