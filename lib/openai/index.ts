@@ -53,7 +53,7 @@ type OpenAIInputType = {
 export const generatebatch2 = (inputParams: OpenAIInputType) => {
   const description = `Generate a description of recommendations for an adventurous trip according to the following schema:
   - Top Adventures Activities:
-    - An array listing top adventure activities to do, including at least 5 activities.
+    - An array listing top adventure activities to do, including at least 8 activities.
     - Each activity should be specified along with its location and budget.
   
   - Local Cuisine Recommendations:
@@ -70,7 +70,7 @@ export const generatebatch3 = (inputParams: OpenAIInputType) => {
   const description = `Generate a description of a travel itinerary and top places to visit according to the following schema:
   - Itinerary:
     - An array containing details of the itinerary for the specified number of days and bugdet of that trip.
-    - Each day's itinerary includes a title and activities for morning, afternoon, and evening.
+    - Each day's itinerary includes a title and activities with budget for morning, afternoon, and evening.
     - Activities are described as follows:
       - Morning, Afternoon, Evening:
         - Each includes an array of itinerary items, where each item has a description and a brief description.
