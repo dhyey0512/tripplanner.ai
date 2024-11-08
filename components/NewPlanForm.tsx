@@ -11,22 +11,23 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Loader2, MessageSquarePlus, Wand2} from "lucide-react";
 import {generatePlanAction} from "@/lib/actions/generateplanAction";
 import PlacesAutoComplete from "@/components/PlacesAutoComplete";
-
 import {generateEmptyPlanAction} from "@/lib/actions/generateEmptyPlanAction";
 import {useToast} from "@/components/ui/use-toast";
 import {ACTIVITY_PREFERENCES, COMPANION_PREFERENCES} from "@/lib/constants";
 import DateRangeSelector from "@/components/common/DateRangeSelector";
 
+// 1. Update the form schema to include 'budget'
 const formSchema = z.object({
   placeName: z
     .string({required_error: "Please select a place"})
-    .min(3, "Place name should be at least 3 character long"),
+    .min(3, "Place name should be at least 3 characters long"),
   datesOfTravel: z.object({
     from: z.date(),
     to: z.date(),
   }),
   activityPreferences: z.array(z.string()),
   companion: z.optional(z.string()),
+  budget: z.number().min(0, "Budget must be at least 0"), // New budget field
 });
 
 export type formSchemaType = z.infer<typeof formSchema>;
@@ -37,11 +38,11 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
 
   const [pendingEmptyPlan, startTransactionEmptyPlan] = useTransition();
   const [pendingAIPlan, startTransactionAiPlan] = useTransition();
-
   const [selectedFromList, setSelectedFromList] = useState(false);
 
   const {toast} = useToast();
 
+  // 2. Add 'budget' to the default values
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +53,7 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
         from: undefined,
         to: undefined,
       },
+      budget: 5000, // Default budget value
     },
   });
 
@@ -97,6 +99,7 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
   return (
     <Form {...form}>
       <form className="space-y-4">
+        {/* Place Name Field */}
         <FormField
           control={form.control}
           name="placeName"
@@ -115,6 +118,8 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
             </FormItem>
           )}
         />
+        
+        {/* Date Selector Field */}
         <FormField
           control={form.control}
           name="datesOfTravel"
@@ -130,6 +135,8 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
             </FormItem>
           )}
         />
+
+        {/* Activity Preferences Field */}
         <FormField
           control={form.control}
           name="activityPreferences"
@@ -178,6 +185,8 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
             </FormItem>
           )}
         />
+
+        {/* Companion Field */}
         <FormField
           control={form.control}
           name="companion"
@@ -204,7 +213,7 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
                         type="radio"
                         className="hidden"
                         name="companion"
-                        checked={field.value == companion.id ?? false}
+                        checked={field.value === companion.id}
                         onChange={(e) => {
                           if (e.target.checked) {
                             field.onChange(companion.id);
@@ -221,44 +230,69 @@ const NewPlanForm = ({closeModal}: {closeModal: Dispatch<SetStateAction<boolean>
             </FormItem>
           )}
         />
+
+        {/* 3. Change Budget Slider to Text Input */}
+        <FormField
+          control={form.control}
+          name="budget"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>
+                Enter your budget <span className="font-medium ml-1">(Optional)</span>
+              </FormLabel>
+              <FormControl>
+                <div className="flex flex-col">
+                  <input
+                    type="number" // Use number input for manual budget entry
+                    min="0"
+                    step="100"
+                    value={field.value}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    className="input-class" // Add relevant classes for styling
+                  />
+                  <span className="text-sm mt-2">Budget: ₹{field.value}</span>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <div className="w-full flex justify-between gap-1">
           <Button
             onClick={() => form.handleSubmit(onSubmitEmptyPlan)()}
             aria-label="generate plan"
             type="submit"
             disabled={pendingEmptyPlan || pendingAIPlan || !form.formState.isValid}
-            className="bg-yellow-500 text-white hover:bg-yellow-600 w-full"
           >
             {pendingEmptyPlan ? (
-              <div className="flex gap-1 justify-center items-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                <span>Generating Travel Plan...</span>
-              </div>
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Generating...
+              </>
             ) : (
-              <div className="flex gap-1 justify-center items-center">
-                <MessageSquarePlus className="h-4 w-4" />
-                <span>Create Your Plan</span>
-              </div>
+              <>
+                <MessageSquarePlus className="w-4 h-4 mr-2" />
+                Generate Empty Plan
+              </>
             )}
           </Button>
-
           <Button
             onClick={() => form.handleSubmit(onSubmitAIPlan)()}
-            aria-label="generate AI plan"
+            aria-label="generate plan"
             type="submit"
-            disabled={pendingAIPlan || pendingEmptyPlan || !form.formState.isValid}
-            className="bg-indigo-500 text-white hover:bg-indigo-600 w-full group"
+            disabled={pendingEmptyPlan || pendingAIPlan || !form.formState.isValid}
           >
             {pendingAIPlan ? (
-              <div className="flex gap-1 justify-center items-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                <span>Generating AI Travel Plan...</span>
-              </div>
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Generating...
+              </>
             ) : (
-              <div className="flex gap-1 justify-center items-center ">
-                <Wand2 className="h-4 w-4 group-hover:animate-pulse" />
-                <span>Generate AI Plan</span>
-              </div>
+              <>
+                <Wand2 className="w-4 h-4 mr-2" />
+                Generate AI Plan
+              </>
             )}
           </Button>
         </div>
