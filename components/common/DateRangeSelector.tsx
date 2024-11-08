@@ -1,11 +1,12 @@
-import {Button} from "@/components/ui/button";
-import {Calendar} from "@/components/ui/calendar";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {cn, getFormattedDateRange} from "@/lib/utils";
-import {format, formatDate} from "date-fns";
-import {CalendarIcon} from "lucide-react";
-import {Dispatch, SetStateAction, useState} from "react";
-import {DateRange} from "react-day-picker";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn, getFormattedDateRange } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { useConvexAuth } from "convex/react";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import { Dispatch, SetStateAction, useState } from "react";
+import { DateRange } from "react-day-picker";
 
 type DateRangeSelectorProps = {
   onChange: (e: DateRange | undefined) => void;
@@ -13,11 +14,18 @@ type DateRangeSelectorProps = {
   forGeneratePlan: boolean;
 };
 
-const DateRangeSelector = ({value, onChange, forGeneratePlan}: DateRangeSelectorProps) => {
+const DateRangeSelector = ({ value, onChange, forGeneratePlan }: DateRangeSelectorProps) => {
   const [dateRangePopoverOpen, setDateRangePopoverOpen] = useState(false);
 
+  const { isAuthenticated } = useConvexAuth(); // Get authentication status
+  const router = useRouter(); // Initialize the router
+
   const resetControl = () => {
-    onChange({from: undefined, to: undefined});
+    onChange({ from: undefined, to: undefined });
+
+    // Navigate to the same page as the Logo component
+    const targetPath = isAuthenticated ? "/dashboard" : "/";
+    router.push(targetPath);
   };
 
   return (
@@ -30,18 +38,18 @@ const DateRangeSelector = ({value, onChange, forGeneratePlan}: DateRangeSelector
             "pl-3 text-left font-normal",
             !value && "text-muted-foreground",
             "flex justify-between",
-            {"bg-foreground/50 text-background": !forGeneratePlan},
+            { "bg-foreground/50 text-background": !forGeneratePlan },
             {
               "bg-foreground": dateRangePopoverOpen && !forGeneratePlan,
             }
           )}
         >
           {value && value.from && value.to ? (
-            <span className={cn({"font-semibold": !forGeneratePlan})}>
+            <span className={cn({ "font-semibold": !forGeneratePlan })}>
               {getFormattedDateRange(value.from, value.to)}
             </span>
           ) : (
-            <span className={cn({"text-muted-foreground": forGeneratePlan})}>
+            <span className={cn({ "text-muted-foreground": forGeneratePlan })}>
               Pick Travel Dates
             </span>
           )}
@@ -53,7 +61,6 @@ const DateRangeSelector = ({value, onChange, forGeneratePlan}: DateRangeSelector
           month={value?.from}
           mode="range"
           numberOfMonths={2}
-          max={10}
           selected={value}
           onSelect={(e) => {
             onChange(e);
@@ -61,7 +68,12 @@ const DateRangeSelector = ({value, onChange, forGeneratePlan}: DateRangeSelector
               setDateRangePopoverOpen(false);
             }
           }}
-          disabled={(date) => date < new Date("1900-01-01")}
+          disabled={(date) => {
+            if (date) {
+              return date < new Date(); // Disable past dates
+            }
+            return false; // Allow all dates if date is undefined
+          }}
           initialFocus
         />
         <div className="w-full flex justify-end pr-5 pb-3">
